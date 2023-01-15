@@ -5,7 +5,7 @@ const express = require('express');
 const { executeSql } = require('./routes.js');
 
 const query = {
-  createQuery: `INSERT INTO query (title, user_id, role_id, source_id) VALUE (:title, :user_id, :role_id, :source_id)`,
+  createQuery: `INSERT INTO query (id, title, user_id, role_id, source_id) VALUE (:id, :title, :user_id, :role_id, :source_id)`,
   readQuery: `SELECT * FROM query WHERE id = :id`,
   readAllQueries: `SELECT * FROM query`,
   updateQuery: `UPDATE query SET title = :title, user_id = :user_id, role_id = :role_id, source_id = :source_id WHERE id = :id`,
@@ -14,9 +14,9 @@ const query = {
 
 const router = new express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
   try {
-    await executeSql(query.createQuery, req.body);
+    await executeSql(query.createQuery, { ...req.body, ...req.params } );
     let result = await executeSql(query.readQuery, req.params);
     res.status(200).send(result);
   } catch (e) {
