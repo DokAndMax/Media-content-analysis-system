@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `mydb`.`user` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NULL,
   `login` VARCHAR(255) NULL,
   `password` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`query` (
   `title` VARCHAR(255) NULL,
   `user_id` INT NOT NULL,
   `role_id` INT NOT NULL,
+  `source_id` INT NOT NULL,
   PRIMARY KEY (`id`, `user_id`, `role_id`, `source_id`),
   INDEX `fk_query_user_idx` (`user_id` ASC) VISIBLE,
   INDEX `fk_query_role_idx` (`role_id` ASC) VISIBLE,
@@ -91,6 +93,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`result` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `content-analysis`.`source`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `content-analysis`.`source` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(45) NULL,
+  `api-key` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `mydb`.`scraperType`

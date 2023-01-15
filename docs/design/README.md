@@ -126,11 +126,11 @@ Message "1, 1" -- "0, *" Metadata
     created: Datetime
     modified:Datetime
   }
-  
-  entity Source  {
-    id: Int
-    url: Url-reference
-    api-key: Int
+
+  entity Source {
+    id: int
+    url: uri-reference
+    api-key: int
   }
   
   entity Result  {
@@ -148,12 +148,6 @@ Message "1, 1" -- "0, *" Metadata
     id: int
     key: int
     value: text
-  }
-  
-  entity Source {
-    id: int
-    url: uri-reference
-    api-key: int
   }
   
   entity ScraperType {
