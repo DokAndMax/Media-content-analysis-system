@@ -6,5 +6,5 @@ db:
   host: localhost
   dbName: mydb
   userName: root
-  userPassword: a7z0032
+  userPassword: passw0rd
   dialect: mysql
