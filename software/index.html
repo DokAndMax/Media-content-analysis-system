@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Реалізація інформаційного та програмного забезпечення | 3. Система аналізу медіа-контенту</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/Media-content-analysis-system/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="description" content="Курсова робота з дисципліни "Бази даних"">
+    
+    <link rel="preload" href="/Media-content-analysis-system/assets/css/0.styles.a70168f2.css" as="style"><link rel="preload" href="/Media-content-analysis-system/assets/js/app.6e3351c6.js" as="script"><link rel="preload" href="/Media-content-analysis-system/assets/js/2.ba84e56d.js" as="script"><link rel="preload" href="/Media-content-analysis-system/assets/js/23.ce9255bc.js" as="script"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/10.578029e3.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/11.7089fb2b.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/12.5aa4344e.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/13.a7c10e50.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/14.a6f67018.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/15.2eac638b.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/16.d675dde1.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/17.e9f12b40.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/18.5af8c7a5.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/19.00a49181.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/20.5c5ac0ed.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/21.b62a2cfe.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/22.b77cfeba.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/24.ce349e83.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/25.eee2c70c.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/26.35053981.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/3.7aa3762a.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/4.478f3150.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/5.e43b25f5.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/6.20079aae.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/7.8fd3e675.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/8.69b40389.js"><link rel="prefetch" href="/Media-content-analysis-system/assets/js/9.9adf0b87.js">
+    <link rel="stylesheet" href="/Media-content-analysis-system/assets/css/0.styles.a70168f2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Media-content-analysis-system/" class="home-link router-link-active"><!----> <span class="site-name">3. Система аналізу медіа-контенту</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Media-content-analysis-system/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/DokAndMax/Media-content-analysis-system" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Media-content-analysis-system/" class="nav-link">
+  Початок
+</a></div> <a href="https://github.com/DokAndMax/Media-content-analysis-system" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/Media-content-analysis-system/intro/" class="sidebar-link">Вступ</a></li><li><section class="sidebar-group collapsable depth-0"><a href="/Media-content-analysis-system/requirements/" class="sidebar-heading clickable"><span>Розроблення загальних вимог до системи</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/Media-content-analysis-system/use%20cases/" class="sidebar-link">Розроблення вимог до функціональности системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/use%20cases/#загальна-схема" class="sidebar-link">Загальна схема</a></li></ul></li><li><a href="/Media-content-analysis-system/design/" class="sidebar-link">Проектування інформаційного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/design/#business-model" class="sidebar-link">Business Model</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/design/#er-model" class="sidebar-link">ER-model</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/design/#relational-schema" class="sidebar-link">Relational Schema</a></li></ul></li><li><a href="/Media-content-analysis-system/software/" aria-current="page" class="active sidebar-link">Реалізація інформаційного та програмного забезпечення</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#sql-скрипт-для-створення-на-початкового-наповнення-бази-даних" class="sidebar-link">SQL-скрипт для створення на початкового наповнення бази даних</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#restfull-сервіс-для-управління-даними" class="sidebar-link">RESTfull сервіс для управління даними</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#точка-входу-проєкту" class="sidebar-link">Точка входу проєкту</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#конфігураціинии-фаил-проєкту" class="sidebar-link">Конфігураційний файл проєкту</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#api-взаємодіі-з-конфігурацією" class="sidebar-link">API взаємодії з конфігурацією</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#api-взаємодіі-з-базою-даних" class="sidebar-link">API взаємодії з базою даних</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/software/#контролер-маршруту-query" class="sidebar-link">Контролер маршруту &quot;/query&quot;</a></li></ul></li></ul></li><li><a href="/Media-content-analysis-system/test/" class="sidebar-link">Тестування працездатності системи</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/test/#post-запит-для-додавання-нового-рядка" class="sidebar-link">POST-запит для додавання нового рядка</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/test/#get-запит-для-перевірки-всіх-рядків" class="sidebar-link">GET-запит для перевірки всіх рядків</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/test/#get-запит-для-перевірки-рядка-з-конкретним-id" class="sidebar-link">GET-запит для перевірки рядка з конкретним id</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/test/#put-запит-для-зміни-наявного-рядка" class="sidebar-link">PUT-запит для зміни наявного рядка</a></li><li class="sidebar-sub-header"><a href="/Media-content-analysis-system/test/#контрольнии-get-запит-для-перевірки-успішності-попередніх-запитів" class="sidebar-link">Контрольний GET-запит для перевірки успішності попередніх запитів</a></li></ul></li><li><a href="/Media-content-analysis-system/conclusion/" class="sidebar-link">Висновки</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="реалізація-інформаціиного-та-програмного-забезпечення"><a href="#реалізація-інформаціиного-та-програмного-забезпечення" class="header-anchor">#</a> Реалізація інформаційного та програмного забезпечення</h1> <p>В рамках проєкту розробляється:</p> <h2 id="sql-скрипт-для-створення-на-початкового-наповнення-бази-даних"><a href="#sql-скрипт-для-створення-на-початкового-наповнення-бази-даних" class="header-anchor">#</a> SQL-скрипт для створення на початкового наповнення бази даних</h2> <div class="language-query extra-class"><pre class="language-text"><code>SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `login` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`query`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`query` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`query` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NULL,
+  `user_id` INT NOT NULL,
+  `role_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `user_id`, `role_id`, `source_id`),
+  INDEX `fk_query_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_query_role_idx` (`role_id` ASC) VISIBLE,
+  INDEX `fk_query_source_idx` (`source_id` ASC) VISIBLE,
+  CONSTRAINT `fk_query_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_query_role`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `mydb`.`role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_query_source`
+    FOREIGN KEY (`source_id`)
+    REFERENCES `mydb`.`source` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`role`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`role` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`role` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `description` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`result`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`result` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`result` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `description` VARCHAR(255) NULL,
+  `query_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `query_id`),
+  INDEX `fk_result_query_idx` (`query_id` ASC) VISIBLE,
+  CONSTRAINT `fk_result_query`
+    FOREIGN KEY (`query_id`)
+    REFERENCES `mydb`.`query` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`scraperType`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`scraperType` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`scraperType` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NULL,
+  `repo` VARCHAR(45) NULL,
+  `source_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `source_id`),
+  INDEX `fk_scraper_type_source1_idx` (`source_id` ASC) VISIBLE,
+  CONSTRAINT `fk_scraper_type_source1`
+    FOREIGN KEY (`source_id`)
+    REFERENCES `mydb`.`source` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`scraperInstance`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`scraperInstance` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`scraperInstance` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `end_point` VARCHAR(45) NULL,
+  `task_id` INT NOT NULL,
+  `scraperType_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `scraperType_id`),
+  INDEX `fk_scraperInstance_scraperType1_idx` (`scraperType_id` ASC) VISIBLE,
+  CONSTRAINT `fk_scraperInstance_scraperType1`
+    FOREIGN KEY (`scraperType_id`)
+    REFERENCES `mydb`.`scraperType` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`message`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`message` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`message` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `data` TEXT NULL,
+  `scraperInstance_id` INT NOT NULL,
+  `result_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `scraperInstance_id`, `result_id`),
+  INDEX `fk_message_result_idx` (`result_id` ASC) VISIBLE,
+  INDEX `fk_message_scraperInstance1_idx` (`scraperInstance_id` ASC) VISIBLE,
+  CONSTRAINT `fk_message_scraperInstance1`
+    FOREIGN KEY (`scraperInstance_id`)
+    REFERENCES `mydb`.`scraperInstance` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_message_result`
+    FOREIGN KEY (`result_id`)
+    REFERENCES `mydb`.`result` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`metadata`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`metadata` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`metadata` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `key` VARCHAR(255) NULL,
+  `value` TEXT NULL,
+  `message_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `message_id`),
+  INDEX `fk_metadata_message1_idx` (`message_id` ASC) VISIBLE,
+  CONSTRAINT `fk_metadata_message1`
+    FOREIGN KEY (`message_id`)
+    REFERENCES `mydb`.`message` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+--------------------------------------------------------
+-- Data for table `mydb`.`user`
+--------------------------------------------------------
+
+START TRANSACTION;
+
+USE `mydb`;
+
+INSERT INTO `mydb`.`user` (`id`, `name`, `email`, `password`) VALUES (DEFAULT, 'gddgdg', 'g@gmail.com', 'passw123');
+INSERT INTO `mydb`.`user` (`id`, `name`, `email`, `password`) VALUES (DEFAULT, 'daniil', 'd@gmail.com', 'passw321');
+
+COMMIT;
+
+-------------------------------------------------------
+-- Data for table `mydb`.`source`
+-------------------------------------------------------
+
+START TRANSACTION;
+
+USE `mydb`;
+
+INSERT INTO `mydb`.`source` (`id`, `url`, `api_key`) VALUES (DEFAULT, 'https://kpi.ua', 'AZdsdadWEqweWQEQWEQds');
+INSERT INTO `mydb`.`source` (`id`, `url`, `api_key`) VALUES (DEFAULT, 'https://mono.ua', 'AZdsdEwerwweWQEQWEQds');
+
+COMMIT;
+</code></pre></div><h2 id="restfull-сервіс-для-управління-даними"><a href="#restfull-сервіс-для-управління-даними" class="header-anchor">#</a> RESTfull сервіс для управління даними</h2> <h3 id="точка-входу-проєкту"><a href="#точка-входу-проєкту" class="header-anchor">#</a> Точка входу проєкту</h3> <div class="language- extra-class"><pre class="language-text"><code>'use strict'
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const config = require('./yaml-config.js')('./service.config.yml');
+
+const app = express();
+
+/*app.use(function (request, response, next) {
+  console.log(response);
+  next();
+});*/
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use('/query', require('./routes/query.js'));
+
+app.listen(config.service.port, () =&gt; {
+  console.log(`http://localhost:${config.service.port}/`);
+});
+</code></pre></div><h3 id="конфігураціинии-фаил-проєкту"><a href="#конфігураціинии-фаил-проєкту" class="header-anchor">#</a> Конфігураційний файл проєкту</h3> <div class="language- extra-class"><pre class="language-text"><code>service:
+  name: MyServer
+  port: 8080
+
+db:
+  host: localhost
+  dbName: mydb
+  userName: root
+  userPassword: a7z0032
+  dialect: mysql
+</code></pre></div><h3 id="api-взаємодіі-з-конфігурацією"><a href="#api-взаємодіі-з-конфігурацією" class="header-anchor">#</a> API взаємодії з конфігурацією</h3> <div class="language- extra-class"><pre class="language-text"><code>'use strict'
+
+const yaml = require(&quot;js-yaml&quot;);
+const fs = require(&quot;fs&quot;);
+
+function loadConfig(file) {
+  try {
+    return yaml.load(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+module.exports = loadConfig;
+</code></pre></div><h3 id="api-взаємодіі-з-базою-даних"><a href="#api-взаємодіі-з-базою-даних" class="header-anchor">#</a> API взаємодії з базою даних</h3> <div class="language- extra-class"><pre class="language-text"><code>'use strict'
+
+const mysql = require('mysql2/promise');
+const config = require('../yaml-config.js')('./service.config.yml');
+
+const executeSql = async (query, values) =&gt; {
+  let connection;
+  let sqlStatement;
+  try {
+    connection = await mysql.createConnection({
+      host: config.db.host,
+      user: config.db.userName,
+      password: config.db.userPassword,
+      database: config.db.dbName,
+      namedPlaceholders: true,
+    });
+
+    sqlStatement = connection.format(query, values);
+    const [results] = await connection.execute(sqlStatement);
+    return results;
+  }
+  catch (e) {
+    throw new Error(`${e.toString()}`);
+  } finally {
+    if(connection) connection.end();
+  }
+}
+module.exports = { executeSql };
+</code></pre></div><h3 id="контролер-маршруту-query"><a href="#контролер-маршруту-query" class="header-anchor">#</a> Контролер маршруту &quot;/query&quot;</h3> <div class="language- extra-class"><pre class="language-text"><code>'use strict'
+
+const express = require('express');
+
+const { executeSql } = require('./routes.js');
+
+const query = {
+  createQuery: `INSERT INTO query (title, user_id, role_id, source_id) VALUE (:title, :user_id, :role_id, :source_id)`,
+  readQuery: `SELECT * FROM query WHERE id = :id`,
+  readAllQueries: `SELECT * FROM query`,
+  updateQuery: `UPDATE query SET title = :title, user_id = :user_id, role_id = :role_id, source_id = :source_id WHERE id = :id`,
+  deleteQuery: `DELETE FROM query WHERE id = :id`,
+};
+
+const router = new express.Router();
+
+router.post('/', async (req, res) =&gt; {
+  try {
+    await executeSql(query.createQuery, req.body);
+    let result = await executeSql(query.readQuery, req.params);
+    res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(`Something bad happened...`);
+  }
+});
+
+router.get('/', async (req, res) =&gt; {
+  try {
+    let result = await executeSql(query.readAllQueries, req.params);
+    res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(`Something bad happened...`);
+  }
+});
+
+router.get('/:id', async (req, res) =&gt; {
+  try {
+    let result = await executeSql(query.readQuery, req.params);
+    res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(`Something bad happened...`);
+  }
+});
+
+router.put('/:id', async (req, res) =&gt; {
+  try {
+    await executeSql(query.updateQuery, { ...req.body, ...req.params });
+    let result = await executeSql(query.readQuery, req.params);
+      res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(`Something bad happened...`);
+  }
+});
+
+router.delete('/:id', async (req, res) =&gt; {
+  try {
+    let result = await executeSql(query.readQuery, req.params);
+    await executeSql(query.deleteQuery, req.params);
+    res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send(`Something bad happened...`);
+  }
+});
+
+module.exports = router;
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Останнє оновлення:</span> <span class="time">1/16/2023, 12:20:08 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Media-content-analysis-system/design/" class="prev">
+        Проектування інформаційного забезпечення
+      </a></span> <span class="next"><a href="/Media-content-analysis-system/test/">
+        Тестування працездатності системи
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/Media-content-analysis-system/assets/js/app.6e3351c6.js" defer></script><script src="/Media-content-analysis-system/assets/js/2.ba84e56d.js" defer></script><script src="/Media-content-analysis-system/assets/js/23.ce9255bc.js" defer></script>
+  </body>
+</html>
